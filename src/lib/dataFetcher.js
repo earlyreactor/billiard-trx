@@ -39,11 +39,12 @@ export async function getAnalyticsData() {
         const cost = parseFloat((costStr || '0').replace(/[^0-9.-]+/g, ''));
 
         if (!dailyStats[dayKey]) {
-            dailyStats[dayKey] = { day: dayKey, duration: 0, cost: 0 };
+            dailyStats[dayKey] = { day: dayKey, duration: 0, cost: 0, count: 0 };
         }
 
         dailyStats[dayKey].duration += duration;
         dailyStats[dayKey].cost += cost;
+        dailyStats[dayKey].count += 1;
     });
 
     // Convert to array and sort by date

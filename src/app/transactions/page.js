@@ -12,28 +12,13 @@ export default async function TransactionsDashboard() {
     }
 
     // Calculate Summary Stats
-    const totalTransactions = rawAnalytics.reduce((acc, curr) => acc + (curr.count || 1), 0);
-    // Note: getAnalyticsData returns aggregated daily stats { day, duration, cost }. 
-    // It doesn't give total count directly unless I update dataFetcher to distinct rows.
-    // Actually, getAnalyticsData aggregates by day.
-    // Let's re-read dataFetcher.
-    // Ah, I need raw transactions for "Deals completed" count if multiple per day.
-    // But dataFetcher aggregates cost/duration. Counting "rows" isn't possible from the aggregated result accurately if I just sum 1 per day entry.
-    // HOWEVER, for now, let's assume the user accepts "Days Active" or I can tweak dataFetcher later.
-    // Wait, the user wants "Deals completed".
-    // I should create a new fetcher or just fetch raw rows here? No, better use a library function.
-    // I'll stick to what I have: Sum of Duration, Sum of Revenue.
-    // For "Deals Completed", I'll just show "Days Active" for now or sum up if I had a count column.
-
-    // Actually in the previous step I modified dataFetcher to:
-    // transactions.forEach... dailyStats[dayKey]...
-    // I didn't add a count.
-
-    // Let's calculate from daily aggregations:
+    // Calculate Summary Stats
+    const totalTransactions = rawAnalytics.reduce((acc, curr) => acc + (curr.count || 0), 0);
     const totalRevenue = rawAnalytics.reduce((acc, curr) => acc + (curr.cost || 0), 0);
     const totalDuration = rawAnalytics.reduce((acc, curr) => acc + (curr.duration || 0), 0);
-    // Avg per day (Proxy for "Average Price" for now, or just calculate from total)
-    const avgRevenue = rawAnalytics.length > 0 ? totalRevenue / rawAnalytics.length : 0;
+
+    // Avg Transaction Value
+    const avgRevenue = totalTransactions > 0 ? totalRevenue / totalTransactions : 0;
 
     const StatCard = ({ title, value, subtext, highlight }) => (
         <div className="glass-panel flex flex-col justify-between h-32 relative overflow-hidden group">
@@ -81,8 +66,8 @@ export default async function TransactionsDashboard() {
                     highlight
                 />
                 <StatCard
-                    title="Deals completed (Days)"
-                    value={rawAnalytics.length}
+                    title="Deals completed"
+                    value={totalTransactions}
                     subtext="+11.01% ↗"
                     highlight
                 />
@@ -93,7 +78,7 @@ export default async function TransactionsDashboard() {
                     highlight
                 />
                 <StatCard
-                    title="Average price (Daily)"
+                    title="Average price"
                     value={`${(avgRevenue / 1000).toFixed(0)}K`}
                     subtext="+11.01% ↗"
                     highlight
@@ -125,7 +110,7 @@ export default async function TransactionsDashboard() {
                     <div className="flex-1 flex items-center justify-center relative">
                         <div className="w-40 h-40 rounded-full border-[12px] border-[#22c55e] border-r-[#f97316] border-b-[#f97316] border-l-[#e0e0e0] transform rotate-45"></div>
                         <div className="absolute inset-0 flex items-center justify-center text-2xl font-bold">
-                            {rawAnalytics.length}
+                            {totalTransactions}
                         </div>
                     </div>
 
