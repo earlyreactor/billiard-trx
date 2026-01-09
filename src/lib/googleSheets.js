@@ -7,10 +7,17 @@ export async function getSheets() {
         throw new Error('Missing Google Sheets credentials in environment variables');
     }
 
+    let privateKey = process.env.GOOGLE_PRIVATE_KEY;
+
+    // Remove wrapping quotes if present (common in .env files)
+    if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
+        privateKey = privateKey.slice(1, -1);
+    }
+
     const auth = new google.auth.GoogleAuth({
         credentials: {
             client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-            private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+            private_key: privateKey.replace(/\\n/g, '\n'),
         },
         scopes: SCOPES,
     });
