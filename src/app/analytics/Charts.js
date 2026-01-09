@@ -11,34 +11,80 @@ export default function AnalyticsCharts({ data }) {
     // Let's show the raw daily data but maybe limit strictness
 
     return (
-        <div className="flex flex-col gap-8">
-            <div className="glass-panel h-80">
-                <h3 className="text-xl font-bold mb-4 text-primary">Revenue by Date</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <div className="glass-panel" style={{ height: '320px' }}>
+                <h3 style={{ marginBottom: '1rem', color: '#a1a1aa' }}>Revenue by Date</h3>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={data}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-                        <XAxis dataKey="day" stroke="#888" fontSize={12} />
-                        <YAxis stroke="#888" fontSize={12} tickFormatter={(value) => `Rp${value / 1000}k`} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
+                        <XAxis
+                            dataKey="day"
+                            stroke="#71717a"
+                            fontSize={12}
+                            tickLine={false}
+                            axisLine={false}
+                        />
+                        <YAxis
+                            stroke="#71717a"
+                            fontSize={12}
+                            tickFormatter={(value) => `Rp${value / 1000}k`}
+                            tickLine={false}
+                            axisLine={false}
+                        />
                         <Tooltip
-                            contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#fff' }}
+                            contentStyle={{
+                                backgroundColor: 'rgba(23, 23, 23, 0.9)',
+                                borderColor: 'rgba(255,255,255,0.1)',
+                                color: '#fff',
+                                borderRadius: '0.5rem',
+                                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                            }}
+                            cursor={{ fill: 'rgba(255,255,255,0.05)' }}
                             formatter={(value) => [`Rp ${value.toLocaleString()}`, 'Revenue']}
                         />
-                        <Bar dataKey="cost" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                        <Bar
+                            dataKey="cost"
+                            fill="#8b5cf6"
+                            radius={[4, 4, 0, 0]}
+                            animationDuration={1500}
+                        />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
 
-            <div className="glass-panel h-80">
-                <h3 className="text-xl font-bold mb-4 text-accent">Duration (Hours) by Date</h3>
+            <div className="glass-panel" style={{ height: '320px' }}>
+                <h3 style={{ marginBottom: '1rem', color: '#a1a1aa' }}>Duration (Hours) by Date</h3>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={data}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-                        <XAxis dataKey="day" stroke="#888" fontSize={12} />
-                        <YAxis stroke="#888" fontSize={12} />
-                        <Tooltip
-                            contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#fff' }}
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
+                        <XAxis
+                            dataKey="day"
+                            stroke="#71717a"
+                            fontSize={12}
+                            tickLine={false}
+                            axisLine={false}
                         />
-                        <Bar dataKey="duration" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+                        <YAxis
+                            stroke="#71717a"
+                            fontSize={12}
+                            tickLine={false}
+                            axisLine={false}
+                        />
+                        <Tooltip
+                            contentStyle={{
+                                backgroundColor: 'rgba(23, 23, 23, 0.9)',
+                                borderColor: 'rgba(255,255,255,0.1)',
+                                color: '#fff',
+                                borderRadius: '0.5rem'
+                            }}
+                            cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                        />
+                        <Bar
+                            dataKey="duration"
+                            fill="#06b6d4"
+                            radius={[4, 4, 0, 0]}
+                            animationDuration={1500}
+                        />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

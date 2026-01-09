@@ -16,7 +16,7 @@ export default async function AnalyticsPage() {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-6 text-primary">Analytics</h1>
+            <h1>Analytics</h1>
             {error && (
                 <div className="bg-red-900/50 border border-red-500 text-red-200 p-4 rounded mb-6">
                     {error}

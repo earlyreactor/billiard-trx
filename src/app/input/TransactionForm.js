@@ -13,8 +13,7 @@ function SubmitButton() {
         <button
             type="submit"
             disabled={pending}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg w-full flex justify-center items-center gap-2 transition-colors disabled:opacity-50"
-            style={{ backgroundColor: 'var(--primary)', color: 'white', border: 'none', cursor: pending ? 'not-allowed' : 'pointer' }}
+            style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}
         >
             {pending ? <Loader2 className="animate-spin" /> : 'Save Transaction'}
         </button>
@@ -52,18 +51,18 @@ export default function TransactionForm() {
     return (
         <form ref={formRef} action={formAction} className="flex flex-col gap-4">
             <div className="form-group">
-                <label className="block mb-2 text-sm font-medium text-gray-300">Name</label>
+                <label>Name</label>
                 <input name="name" type="text" required placeholder="Customer Name" />
             </div>
 
             <div className="form-group">
-                <label className="block mb-2 text-sm font-medium text-gray-300">Phone (Optional)</label>
+                <label>Phone (Optional)</label>
                 <input name="phone" type="tel" placeholder="0812..." />
             </div>
 
-            <div className="grid grid-cols-2 gap-4" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div className="grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div className="form-group">
-                    <label className="block mb-2 text-sm font-medium text-gray-300">Duration (Hours)</label>
+                    <label>Duration (Hours)</label>
                     <input
                         name="duration"
                         type="number"
@@ -76,7 +75,7 @@ export default function TransactionForm() {
                 </div>
 
                 <div className="form-group">
-                    <label className="block mb-2 text-sm font-medium text-gray-300">Cost (Rp)</label>
+                    <label>Cost (Rp)</label>
                     <input
                         name="cost"
                         type="number"
@@ -93,7 +92,7 @@ export default function TransactionForm() {
             </div>
 
             {/* Helper text */}
-            <p className="text-xs text-center mt-2 text-gray-500" style={{ color: 'var(--secondary)', textAlign: 'center', fontSize: '0.8rem' }}>
+            <p style={{ textAlign: 'center', marginTop: '1rem', opacity: 0.7, fontSize: '0.9rem' }}>
                 Rate: Rp {RATE_PER_HOUR.toLocaleString()} / hour
             </p>
         </form>
