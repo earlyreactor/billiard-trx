@@ -61,16 +61,35 @@ export async function getDividendsData() {
     if (!rows || rows.length === 0) return { headers: [], data: [] };
 
     const headers = rows[0];
-    const data = rows.slice(1).map(row => ({
-        month: row[0],
-        total: row[1],
-        bapak: row[2],
-        marshal: row[3],
-        yodi: row[4],
-        maintenance: row[5],
-        remarks: row[6] || '',
-        control: row[7] || '',
-    }));
+    const data = rows.slice(1).map(row => {
+        // Parse Total: "Rp 1.000.000" -> 1000000
+        const parseCurrency = (val) => {
+            if (!val) return 0;
+            return parseFloat(val.toString().replace(/[^0-9.-]+/g, ""));
+        };
+
+        const total = parseCurrency(row[1]);
+
+        // Logic: 30% Bapak, 60% Marshal, 10% Maintenance
+        // We calculate this dynamically to ensure accuracy regardless of sheet formulas
+        const bapak = total * 0.30;
+        const marshal = total * 0.60;
+        const maintenance = total * 0.10;
+
+        // Helper to format back to Rp string for display
+        const formatRp = (num) => `Rp ${num.toLocaleString('id-ID')}`;
+
+        return {
+            month: row[0],
+            total: formatRp(total),
+            bapak: formatRp(bapak),
+            marshal: formatRp(marshal),
+            yodi: row[4], // Preserving Yodi column if needed, or maybe it's unused now? Keeping it safe.
+            maintenance: formatRp(maintenance),
+            remarks: row[6] || '',
+            control: row[7] || '',
+        };
+    });
 
     // Filter empty rows if any
     const cleanData = data.filter(d => d.month && d.month !== '#N/A');

@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
           <nav className="navbar glass-panel">
             <Link href="/" className="logo">Billiard Trx</Link>
             <div className="nav-links">
+              <Link href="/transactions">Dashboard</Link>
               <Link href="/input">Input</Link>
               <Link href="/analytics">Analytics</Link>
               <Link href="/dividends">Dividends</Link>
