@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  billiard-trx:
+    container_name: billiard-trx
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - GOOGLE_SERVICE_ACCOUNT_EMAIL
+      - GOOGLE_PRIVATE_KEY
+    restart: always
