@@ -53,34 +53,36 @@ export default function Dividends() {
                 <SummaryCard title="Maintenance (10%)" value={formatCurrency(totalMaintenance)} color="text-orange-500" />
             </div>
 
-            <div className="glass-panel overflow-hidden">
-                <table className="w-full text-left border-collapse">
-                    <thead>
-                        <tr className="border-b border-gray-100 bg-gray-50/50">
-                            <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Month</th>
-                            <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Total Revenue</th>
-                            <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Bapak (30%)</th>
-                            <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Marshal (60%)</th>
-                            <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Maintenance (10%)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {calculatedData.map((row, i) => (
-                            <tr key={i} className="border-b border-gray-100 hover:bg-gray-50/80 transition-colors">
-                                <td className="p-4 font-semibold text-gray-900">{row.month}</td>
-                                <td className="p-4 text-gray-600">{row.total}</td>
-                                <td className="p-4 text-green-600 font-medium">{row.bapak}</td>
-                                <td className="p-4 text-blue-600 font-medium">{row.marshal}</td>
-                                <td className="p-4 text-orange-500 font-medium">{row.maintenance}</td>
+            <div className="glass-panel p-0 overflow-hidden">
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                        <thead>
+                            <tr className="border-b border-gray-100 bg-gray-50/50">
+                                <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Month</th>
+                                <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Total Revenue</th>
+                                <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Bapak (30%)</th>
+                                <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Marshal (60%)</th>
+                                <th className="p-4 font-bold text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap">Maintenance (10%)</th>
                             </tr>
-                        ))}
-                        {calculatedData.length === 0 && (
-                            <tr>
-                                <td colSpan={5} className="p-8 text-center text-gray-500">No transaction data found</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {calculatedData.map((row, i) => (
+                                <tr key={i} className="border-b border-gray-100 hover:bg-gray-50/80 transition-colors">
+                                    <td className="p-4 font-semibold text-gray-900 whitespace-nowrap">{row.month}</td>
+                                    <td className="p-4 text-gray-600 whitespace-nowrap">{row.total}</td>
+                                    <td className="p-4 text-green-600 font-medium whitespace-nowrap">{row.bapak}</td>
+                                    <td className="p-4 text-blue-600 font-medium whitespace-nowrap">{row.marshal}</td>
+                                    <td className="p-4 text-orange-500 font-medium whitespace-nowrap">{row.maintenance}</td>
+                                </tr>
+                            ))}
+                            {calculatedData.length === 0 && (
+                                <tr>
+                                    <td colSpan={5} className="p-8 text-center text-gray-500">No transaction data found</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

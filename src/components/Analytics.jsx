@@ -36,7 +36,7 @@ export default function Analytics() {
                 <h2 className="text-2xl font-bold text-gray-900">Monthly Analytics</h2>
             </div>
 
-            <div className="h-[400px] w-full">
+            <div className="h-[300px] md:h-[400px] w-full">
                 {data.length > 0 ? (
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>

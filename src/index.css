@@ -191,3 +191,64 @@ button:disabled {
     color: #F3F4F6;
     box-shadow: none;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .navbar {
+        padding: 0.5rem 1.25rem;
+        margin-bottom: 2rem;
+        top: 1rem;
+    }
+
+    .nav-links {
+        gap: 0.5rem;
+    }
+
+    .nav-links a {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .glass-panel {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    h2 {
+        font-size: 1.5rem !important;
+    }
+
+    /* Stack grid forms on mobile */
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-links a {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+
+    .logo span {
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 0.875rem 2rem;
+        width: 100%;
+        /* Full width buttons on tiny screens */
+    }
+}
