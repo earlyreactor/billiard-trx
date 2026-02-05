@@ -194,6 +194,12 @@ button:disabled {
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
+    body {
+        /* On mobile, cover is better to ensure the background fills the tall screen */
+        background-size: cover;
+        background-position: center;
+    }
+
     .container {
         padding: 1rem;
     }
