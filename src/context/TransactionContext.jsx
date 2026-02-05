@@ -28,7 +28,9 @@ export function TransactionProvider({ children }) {
     useEffect(() => {
         const fetchSheetData = async () => {
             try {
-                const response = await fetch(SHEET_CSV_URL);
+                // Add a cache buster (timestamp) so we don't see old data for 5 minutes
+                const cacheBuster = `&t=${new Date().getTime()}`;
+                const response = await fetch(SHEET_CSV_URL + cacheBuster);
                 const csvText = await response.text();
 
                 Papa.parse(csvText, {
@@ -84,7 +86,7 @@ export function TransactionProvider({ children }) {
     const transactions = [...localTransactions, ...sheetTransactions];
 
     // Google Apps Script Web App URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_MOgnDRe6STSwaLnwa-G2jD7H0Pw6GmOTeRtf49rH6dpDsxGRJj8JD1sCApEL3XSM/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyaaqyVbyuOxBWQtarrjZWx9aHsO4b7GULXwBF4LCO0pPMy_fcyGj3cOX5oQhduERW0/exec';
 
     const saveToSheet = async (data) => {
         try {
