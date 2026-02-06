@@ -13,9 +13,12 @@
   },
   "dependencies": {
     "googleapis": "^170.0.0",
+    "jspdf": "^4.1.0",
+    "jspdf-autotable": "^5.0.7",
     "lucide-react": "^0.562.0",
     "papaparse": "^5.5.3",
     "react": "19.2.3",
+    "react-datepicker": "^9.1.0",
     "react-dom": "19.2.3",
     "recharts": "^3.6.0",
     "sweetalert2": "^11.26.18"

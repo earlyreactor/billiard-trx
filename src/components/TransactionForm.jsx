@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTransactions } from '../context/TransactionContext';
 import Swal from 'sweetalert2';
+import transactionIcon from '../assets/transaction.png';
 
 const RATE_PER_HOUR = 35000;
 
@@ -68,11 +69,9 @@ export default function TransactionForm() {
         <div className="glass-panel p-8 w-full max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-3 mb-6">
                 <img
-                    src="/transaction.png"
+                    src={transactionIcon}
                     alt="icon"
-                    className="w-8 h-8 object-contain hidden"
-                    onError={(e) => e.target.style.display = 'none'}
-                    onLoad={(e) => e.target.style.display = 'block'}
+                    className="w-8 h-8 object-contain"
                 />
                 <h2 className="text-2xl font-bold text-gray-900 text-center">New Transaction</h2>
             </div>
