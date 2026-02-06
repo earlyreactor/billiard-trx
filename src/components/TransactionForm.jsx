@@ -73,7 +73,7 @@ export default function TransactionForm() {
                     alt="icon"
                     className="w-8 h-8 object-contain"
                 />
-                <h2 className="text-2xl font-bold text-gray-900 text-center">New Transaction</h2>
+                <h2 className="text-2xl font-bold text-center" style={{ color: 'var(--foreground)' }}>New Transaction</h2>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
 
@@ -132,7 +132,7 @@ export default function TransactionForm() {
                     {isSubmitting ? 'Saving...' : 'Save Transaction'}
                 </button>
 
-                <p className="text-center text-xs text-gray-500 mt-2">
+                <p className="text-center text-xs mt-2" style={{ color: 'var(--foreground)', opacity: 0.6 }}>
                     Rate: Rp {RATE_PER_HOUR.toLocaleString()} / hour
                 </p>
             </form>

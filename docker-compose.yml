@@ -4,10 +4,32 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      network: host
     ports:
-      - "3000:3000"
+      - "5173:5173" # Vite dev server port
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./index.html:/app/index.html
+      - ./vite.config.js:/app/vite.config.js
+      - /app/node_modules # Prevent node_modules from being overwritten
     environment:
-      - GOOGLE_SERVICE_ACCOUNT_EMAIL
-      - GOOGLE_PRIVATE_KEY
-    restart: always
+      - NODE_ENV=development
+      - VITE_SHEET_CSV_URL=${VITE_SHEET_CSV_URL}
+      - VITE_APPS_SCRIPT_URL=${VITE_APPS_SCRIPT_URL}
+    command: npm run dev -- --host 0.0.0.0
+    restart: unless-stopped
+
+  # Production build with nginx
+  billiard-trx-prod:
+    container_name: billiard-trx-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "8080:80" # Nginx port
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    profiles:
+      - production

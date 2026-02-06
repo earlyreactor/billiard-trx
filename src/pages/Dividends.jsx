@@ -109,7 +109,7 @@ export default function Dividends() {
 
             {/* Search Bar */}
             <div className="relative">
-                <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: 'var(--foreground)', opacity: 0.4 }} />
                 <input
                     type="text"
                     placeholder="Search by month..."
